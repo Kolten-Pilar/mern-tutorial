@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getGoals, setGoal, updateGoal, deleteGoal } = require('../controllers/goalController');
+const { protect } = require('../middleware/authMiddleware');
 //another way to write
 //const goalController = require('../controllers/goalController');
 
@@ -14,8 +15,8 @@ const { getGoals, setGoal, updateGoal, deleteGoal } = require('../controllers/go
 //another way to write
 //router.post('/', goalController.setGoal) || router.post('/', setGoal)
 router.route('/')
-.get(getGoals)
-.post(setGoal)
+.get(protect, getGoals)
+.post(protect, setGoal)
 
 //update
 //another way to write
@@ -24,8 +25,8 @@ router.route('/')
 //another way to write
 //router.delete('/:id', goalController.deleteGoal) || router.delete('/:id', deleteGoal)
 router.route('/:id')
-.put(updateGoal)
-.delete(deleteGoal)
+.put(protect, updateGoal)
+.delete(protect, deleteGoal)
 
 
 module.exports = router;
