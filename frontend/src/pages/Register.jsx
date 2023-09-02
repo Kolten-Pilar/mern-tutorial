@@ -111,8 +111,8 @@ function Register() {
             <input
               type='password'
               className='form-control'
-              id='password'
-              name='password'
+              id='password2'
+              name='password2'
               value={password2}
               placeholder='Confirm password'
               onChange={onChange}

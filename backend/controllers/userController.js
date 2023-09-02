@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs"); //for hashing password
 const asyncHandler = require("express-async-handler");
-const User = require("../models/userModel.cjs");
+const User = require('../models/userModel')
 
 // @desc: register user
 //@route: POST /api/users
