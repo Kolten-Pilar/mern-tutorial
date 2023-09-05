@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
@@ -18,6 +19,22 @@ app.use(express.urlencoded({extended: false}));
 //use goalRoutes to handle any endpoints that end with /api/goals
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+
+// Serve frontend build files in production
+if (process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+  app.get('*', (req, res) => 
+    res.sendFile(path.resolve(__dirname, '../', 'frontend', 'dist', 'index.html')
+    )
+  )
+ 
+} else {
+  app.get('/', (req, res) => {
+    res.send('Please set to production mode');
+  })
+}
 
 app.use(errorHandler);
 
